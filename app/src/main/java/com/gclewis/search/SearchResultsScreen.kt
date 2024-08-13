@@ -1,6 +1,5 @@
 package com.gclewis.search
 
-import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,9 +16,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat.startActivity
 
 
 @Composable
@@ -49,25 +48,14 @@ fun SearchResultsScreen(viewModel: SearchResultsViewModel, modifier: Modifier = 
                         Text(
                             text = searchResult.title,
                             modifier = Modifier
-                                .padding(8.dp),
-                            textAlign = TextAlign.Center
+                                .padding(16.dp),
+                            fontWeight = FontWeight.Bold
                         )
-
-                        TextButton(
-                            onClick = {
-                                val uri =
-                                    Uri.parse("https://www.govuk.com${searchResult._id}")
-//                                val intent = Intent(Intent.ACTION_VIEW, uri)
-//                                startActivity(intent)
-                            }) {
-                            Text(text = searchResult._id)
-                        }
 
                         Text(
                             text = searchResult.description,
                             modifier = Modifier
-                                .padding(8.dp),
-                            textAlign = TextAlign.Center
+                                .padding(16.dp)
                         )
                     }
                 }
