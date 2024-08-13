@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 class SearchResultsViewModel : ViewModel() {
+    val isLoading: Boolean = false
+    var searchTerm: String = "taxes"
     private val repository = SearchResultsRepository()
     private val _results = MutableLiveData<List<SearchResult>>()
 
@@ -15,11 +17,19 @@ class SearchResultsViewModel : ViewModel() {
     fun fetchSearchResults() {
         viewModelScope.launch {
             try {
-                val results = repository.getSearchResults("taxes", 3)
+                val results = repository.getSearchResults(searchTerm, 6)
                 _results.value = results.results
             } catch (e: Exception) {
                 println("Error fetching: ${e.message}")
             }
         }
+    }
+
+    fun onSearchTermChange(s: String) {
+        searchTerm = s
+    }
+
+    fun onSearch(s: String) {
+        fetchSearchResults()
     }
 }
